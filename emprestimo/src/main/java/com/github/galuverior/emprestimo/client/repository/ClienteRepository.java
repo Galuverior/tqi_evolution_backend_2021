@@ -1,5 +1,6 @@
 package com.github.galuverior.emprestimo.client.repository;
 
+import com.github.galuverior.emprestimo.client.dto.AuthDTO;
 import com.github.galuverior.emprestimo.client.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
