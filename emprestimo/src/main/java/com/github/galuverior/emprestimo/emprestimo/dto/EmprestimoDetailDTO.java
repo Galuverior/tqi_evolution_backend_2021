@@ -3,7 +3,7 @@ package com.github.galuverior.emprestimo.emprestimo.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Data
@@ -15,7 +15,7 @@ public class EmprestimoDetailDTO {
 
     private Long qntdParcelas;
 
-    private Date dataPrimeiraParcela;
+    private LocalDate dataPrimeiraParcela;
 
     private String email;
 

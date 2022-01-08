@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome")
@@ -24,13 +24,13 @@ public class Cliente {
     private String email;
 
     @Column(name = "cpf")
-    private Long cpf;
+    private String cpf;
 
     @Column(name = "rg")
-    private Long rg;
+    private String rg;
 
     @Column(name = "senha")
-    private Long senha;
+    private String senha;
 
     @Column(name = "renda")
     private Long renda;

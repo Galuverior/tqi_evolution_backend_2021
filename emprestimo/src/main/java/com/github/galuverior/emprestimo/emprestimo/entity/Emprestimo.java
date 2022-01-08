@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,14 +16,14 @@ import java.util.Date;
 public class Emprestimo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "valor")
     private Long valor;
 
     @Column(name = "data_parcela_1")
-    private Date dataParcela1;
+    private LocalDate dataParcela1;
 
     @Column(name = "qntd_parcela")
     private Long qntdParcela;
