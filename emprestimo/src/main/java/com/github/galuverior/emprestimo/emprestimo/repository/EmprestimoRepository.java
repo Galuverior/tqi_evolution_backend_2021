@@ -1,7 +1,5 @@
 package com.github.galuverior.emprestimo.emprestimo.repository;
 
-import com.github.galuverior.emprestimo.emprestimo.dto.EmprestimoDetailDTO;
-import com.github.galuverior.emprestimo.emprestimo.dto.EmprestimoMinimalDTO;
 import com.github.galuverior.emprestimo.emprestimo.entity.Emprestimo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

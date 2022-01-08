@@ -9,7 +9,10 @@ import com.github.galuverior.emprestimo.emprestimo.repository.EmprestimoReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,11 +33,17 @@ public class EmprestimoService {
     }
 
     public EmprestimoDetailDTO getEmprestimoDetailById(Long id) {
-        return getEmprestimoDetailDTO(emprestimoRepository.getById(id));
+
+        Emprestimo emprestimo = emprestimoRepository.getEmprestimosById(id);
+
+        return Objects.nonNull(emprestimo) ? getEmprestimoDetailDTO(emprestimo) : null;
     }
 
     public EmprestimoMinimalDTO getEmprestimoMinimalById(Long id) {
-        return getEmprestimoMinimalDTO(emprestimoRepository.getById(id));
+
+        Emprestimo emprestimo = emprestimoRepository.getEmprestimosById(id);
+
+        return Objects.nonNull(emprestimo) ? getEmprestimoMinimalDTO(emprestimo) : null;
     }
 
     public EmprestimoDetailDTO getEmprestimoDetailDTO(Emprestimo emprestimo) {
@@ -61,10 +70,25 @@ public class EmprestimoService {
     }
 
     public Emprestimo cadastroEmprestimo(EmprestimoDetailDTO emprestimoDetailDTO) {
-        Cliente cliente = clienteRepository.getClienteByEmail(emprestimoDetailDTO.getEmail());
-        Emprestimo emprestimo = new Emprestimo(4L, emprestimoDetailDTO.getValor(), emprestimoDetailDTO.getDataPrimeiraParcela(),
-                emprestimoDetailDTO.getQntdParcelas(), cliente);
 
-        return emprestimoRepository.save(emprestimo);
+        Emprestimo emprestimo = new Emprestimo();
+
+        if(ChronoUnit.DAYS.between(LocalDate.now(),emprestimoDetailDTO.getDataPrimeiraParcela())< 91 &&
+            emprestimoDetailDTO.getQntdParcelas()< 61) {
+
+            Cliente cliente = clienteRepository.getClienteByEmail(emprestimoDetailDTO.getEmail());
+
+            emprestimo.setId(emprestimoDetailDTO.getId());
+            emprestimo.setValor(emprestimoDetailDTO.getValor());
+            emprestimo.setDataParcela1(emprestimoDetailDTO.getDataPrimeiraParcela());
+            emprestimo.setQntdParcela(emprestimoDetailDTO.getQntdParcelas());
+            emprestimo.setCliente(cliente);
+
+            emprestimoRepository.save(emprestimo);
+        } else {
+            emprestimo = null;
+        }
+
+        return emprestimo;
     }
 }

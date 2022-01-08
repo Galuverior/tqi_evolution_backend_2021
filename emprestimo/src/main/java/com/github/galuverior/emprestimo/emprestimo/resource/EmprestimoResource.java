@@ -18,6 +18,7 @@ public class EmprestimoResource {
     private final EmprestimoService emprestimoService;
 
     public EmprestimoResource(EmprestimoService emprestimoService) {
+
         this.emprestimoService = emprestimoService;
     }
 
@@ -35,25 +36,29 @@ public class EmprestimoResource {
     @GetMapping("/detalhe/{id}")
     public ResponseEntity<EmprestimoDetailDTO> emprestimoDetailById(@PathVariable Long id) {
         EmprestimoDetailDTO emprestimoDetailDTO = emprestimoService.getEmprestimoDetailById(id);
-        return (Objects.nonNull(emprestimoDetailDTO) ? ResponseEntity.ok().body(emprestimoDetailDTO) : ResponseEntity.notFound().build());
+        return (Objects.nonNull(emprestimoDetailDTO) ? ResponseEntity.ok().body(emprestimoDetailDTO) :
+                ResponseEntity.notFound().build());
     }
 
     @GetMapping("/minimo/{id}")
     public ResponseEntity<EmprestimoMinimalDTO> emprestimoMinimalById(@PathVariable Long id) {
         EmprestimoMinimalDTO emprestimoMinimalDTO = emprestimoService.getEmprestimoMinimalById(id);
-        return (Objects.nonNull(emprestimoMinimalDTO) ? ResponseEntity.ok().body(emprestimoMinimalDTO) : ResponseEntity.notFound().build());
+        return (Objects.nonNull(emprestimoMinimalDTO) ? ResponseEntity.ok().body(emprestimoMinimalDTO) :
+                ResponseEntity.notFound().build());
     }
 
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity <List<Emprestimo>> emprestimosByCliente(@PathVariable Long clienteId) {
         List<Emprestimo> emprestimos = emprestimoService.getEmprestimosByCliente(clienteId);
-        return ((Objects.nonNull(emprestimos) && !emprestimos.isEmpty()) ? ResponseEntity.ok().body(emprestimos) : ResponseEntity.notFound().build());
+        return ((Objects.nonNull(emprestimos) && !emprestimos.isEmpty()) ? ResponseEntity.ok().body(emprestimos) :
+                ResponseEntity.notFound().build());
     }
 
     @PostMapping("/cadastro")
     public ResponseEntity<Emprestimo> cadastroEmprestimo(@RequestBody EmprestimoDetailDTO emprestimoDetailDTO) {
         Emprestimo emprestimo = emprestimoService.cadastroEmprestimo(emprestimoDetailDTO);
-        return (Objects.nonNull(emprestimo)) ? ResponseEntity.ok().body(emprestimo) : ResponseEntity.badRequest().build();
+        return (Objects.nonNull(emprestimo)) ? ResponseEntity.ok().body(emprestimo) :
+                ResponseEntity.badRequest().build();
     }
 
 }
